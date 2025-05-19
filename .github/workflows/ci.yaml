@@ -1,8 +1,16 @@
-name: hello-world
-on: push
+name: push or pull workflow
+on:
+  push:
+  pull_request:
 jobs:
-  greet:
+  identify-trigger:
     runs-on: ubuntu-latest
     steps:
-      - name: Say hello-world
-        run: echo "hello-world"
+      - name: check event type
+        run: |
+          echo "Event type: ${{ github.event_name }}"
+          echo "Event action: ${{ github.event.action }}"
+          echo "Event ref: ${{ github.ref }}"
+          echo "Event sha: ${{ github.sha }}"
+          echo "Event repository: ${{ github.repository }}"
+          echo "Event workflow: ${{ github.workflow }}"
